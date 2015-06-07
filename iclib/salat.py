@@ -74,6 +74,7 @@ class Times(object):
 		self.use_second = False
 
 	def get_time(self, i):
+		# negative hours will raise exception
 		if self.use_second: return datetime.time(*self.get_hms(i))
 		else: return datetime.time(*self.get_hm(i))
 

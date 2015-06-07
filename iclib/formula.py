@@ -85,7 +85,17 @@ def julian_day(y, m, d, tz):
 		b = 0
 	abs_jd = (1720994.5 + math.floor(365.25 * y) + math.floor(30.6001 * (m + 1))
 		+ d + b)
+	# negative year is okay, negative julian day might be wrong
 	return abs_jd - tz / 24.0
+
+def qibla(lat, lng):
+	"""Return qibla direction in degrees from the north (clock-wise)"""
+	lng_a = 39.82616111
+	lat_a = 21.42250833
+	deg = _atan2_deg(_sin_deg(lng_a - lng),
+		_cos_deg(lat) * _tan_deg(lat_a)
+		- _sin_deg(lat) * _cos_deg(lng_a - lng))
+	return deg if deg > 0 else deg + 360
 
 def _sin_deg(deg):
 	return math.sin(math.radians(deg))
@@ -101,3 +111,7 @@ def _tan_deg(deg):
 
 def _acot_deg(x_y):
 	return math.degrees(math.atan(1.0 / x_y))
+
+def _atan2_deg(y, x):
+	return math.degrees(math.atan2(y, x))
+
