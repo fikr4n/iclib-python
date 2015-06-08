@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import formula
 
 def direction(lat, lng):
