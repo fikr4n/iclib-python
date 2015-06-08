@@ -54,7 +54,8 @@ class TimeCalculator(object):
 		return self
 
 	def calculate(self):
-		jd = formula.adjust_jd_hour(self.jd, -self.tz)
+		# julian day of local midday (minus timezone, plus 12 hours)
+		jd = formula.adjust_jd_hour(self.jd, -self.tz + 12)
 		ds = formula.decl_sun(jd)
 		transit = formula.zuhr(self.lng, self.tz, formula.eq_time(jd))
 		lat = self.lat
