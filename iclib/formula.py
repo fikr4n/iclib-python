@@ -73,8 +73,8 @@ def decl_sun(jd):
 		+ 0.3812  * _sin_deg(2 * 57.297 * t - 82.682)
 		+ 0.17132 * _sin_deg(3 * 57.297 * t - 59.722))
 
-def julian_day(y, m, d, tz):
-	"""Return Julian Day of a Gregorian date"""
+def gregorian_to_jd(y, m, d):
+	"""Return Julian Day of a Gregorian or Julian date"""
 	if m <= 2:
 		m += 12; y -= 1
 	if y > 1582 or (y == 1582 and (m > 10 or (m == 10 and d >= 15))):
@@ -86,7 +86,10 @@ def julian_day(y, m, d, tz):
 	abs_jd = (1720994.5 + math.floor(365.25 * y) + math.floor(30.6001 * (m + 1))
 		+ d + b)
 	# negative year is okay, negative julian day might be wrong
-	return abs_jd - tz / 24.0
+	return abs_jd
+
+def adjust_jd_hour(jd, hours):
+	return jd + hours / 24.0
 
 def qibla(lat, lng):
 	"""Return qibla direction in degrees from the north (clock-wise)"""

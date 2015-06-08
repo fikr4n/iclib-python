@@ -64,6 +64,21 @@ def mwl_noadjust_100m():
 	for i in c.calculate():
 		print(i)
 
+def mwl_1jan2015():
+	c = salat.TimeCalculator().gregorian_date(2015, 1, 1) \
+		.location(-6.38043079, 106.85337984, 0, 7) \
+		.method('mwl')
+	for i in c.calculate():
+		print(i)
+
+def mwl_1jan2015_tomorrow():
+	c = salat.TimeCalculator().gregorian_date(2015, 1, 1) \
+		.location(-6.38043079, 106.85337984, 0, 7) \
+		.method('mwl')
+	c.date_relative(+1)
+	for i in c.calculate():
+		print(i)
+
 
 loc = sorted(locals().items())
 for k,v in loc:

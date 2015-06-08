@@ -42,17 +42,19 @@ class TimeCalculator(object):
 		return self
 
 	def date(self, date):
-		self.d = date
+		self.jd = formula.gregorian_to_jd(date.year, date.month, date.day)
+		return self
+
+	def gregorian_date(self, y, m, d):
+		self.jd = formula.gregorian_to_jd(y, m, d)
 		return self
 
 	def date_relative(self, days):
-		if not isinstance(days, datetime.timedelta):
-			days = datetime.timedelta(days)
-		self.d += days
+		self.jd += days
 		return self
 
 	def calculate(self):
-		jd = formula.julian_day(self.d.year, self.d.month, self.d.day, self.tz)
+		jd = formula.adjust_jd_hour(self.jd, -self.tz)
 		ds = formula.decl_sun(jd)
 		transit = formula.zuhr(self.lng, self.tz, formula.eq_time(jd))
 		lat = self.lat
