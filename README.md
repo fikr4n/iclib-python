@@ -5,13 +5,17 @@ Islamic Calculation Library (ICLib) contains calculations/algorithms needed spec
 
 This library is inspired by [Islamic Tools Library (ITL)](http://projects.arabeyes.org/project.php?proj=ITL) which seems no longer be maintained. ITL is LGPL-licensed, so you cannot use it for closed source applications if you cannot provide an easy way for the users (of the application, not the developer who uses the library) to change and modify the library used in your application. ICLib is written from "zero" and aims to be more flexible by providing more programming languages and using Apache license, so you can use it even for closed source commercial applications _as long as_ it is for good deeds. I don't know if we need to use modified Apache license to state that limitation :).
 
-Calculation of **prayer times** and **qibla direction** is based on **Dr. Eng. Rinto Anugraha, M.Si.** from Universitas Gadjah Mada, Indonesia (published in 2012 AD), and also refer to **Pedoman Hisab Muhammadiyah** (published in 1430 AH / 2009 AD), **Wikipedia** (English version), etc for comparison and complement.
+Calculation of **prayer times** and **qibla direction** is based on **Dr. Eng. Rinto Anugraha, M.Si.** from Universitas Gadjah Mada, Indonesia (published in 2012 AD), and also refer to **Pedoman Hisab Muhammadiyah** (published in 1430 AH / 2009 AD), **Wikipedia** (English version), etc for comparison and complement. **Umm al-Qura Hijri calendar** month lengths table is based on the output of ITL (not the source code).
 
-Currently only salat times and qibla direction calculation have been provided, others will be available soon inshaallah. After releasing this Python version, we plan to make the C and Java version, and probably other languages.
+After releasing this Python version, we plan to make the C and Java version, and probably other languages. We also plan to implement hilal (crescent) altitude calculation for new moon estimation (not as reference for ibadah).
+
+### Notes on Hijri conversion
+
+Any Hijri conversion including Umm al-Qura is not used as reference for ibadah e.g. beginning of saum (fasting), Eid al-Fitr, and Eid al-Adha.
 
 ## Usage example
 
-Latitude and longite are in degrees, positive values for north and east, negative values for south and west.
+Latitude and longitude are in degrees, positive values for north and east respectively, negative values for south and west respectively. More examples are available in `example-*.py`.
 
 ```python
 	from iclib import salat
@@ -41,6 +45,13 @@ Latitude and longite are in degrees, positive values for north and east, negativ
 	print(qibla.direction(lat, lng)) # in degrees from the north (clock-wise)
 	print(qibla.direction_dms(lat, lng)) # deg, min, sec (as tuple)
 	print(qibla.direction_str(lat, lng)) # deg° min' sec" (as str)
+```
+
+```python
+	from iclib import ummqura
+
+	print(ummqura.to_gregorian(1436, 1, 1)) # year, month, day
+	print(ummqura.from_gregorian(2015, 1, 1)) # year, month, day
 ```
 
 _We need your dua and support_
