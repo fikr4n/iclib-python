@@ -12,6 +12,7 @@
 # - all angles are "currently" in degrees instead of radians
 # - all length (actually only h) are in meters
 # - all times are in hours
+# - month and day start from 1, weekday start from 0 (Ahad/Sunday)
 
 import math
 
@@ -85,8 +86,29 @@ def gregorian_to_jd(y, m, d):
 		b = 0
 	abs_jd = (1720994.5 + math.floor(365.25 * y) + math.floor(30.6001 * (m + 1))
 		+ d + b)
-	# negative year is okay, negative julian day might be wrong
+	# negative year is okay, negative julian day might be wrong (i.e. y < -4712)
 	return abs_jd
+
+def jd_to_gregorian(jd):
+	jd1 = jd + 0.5
+	z = math.floor(jd1)
+	f = jd1 - z
+	if z < 2299161:
+		a = z
+	else:
+		aa = math.floor((z - 1867216.25) / 36524.25)
+		a = z + 1 + aa - math.floor(aa / 4.0)
+	b = a + 1524
+	c = math.floor((b - 122.1) / 365.25)
+	d = math.floor(365.25 * c)
+	e = math.floor((b - d) / 30.6001)
+	day = b - d - math.floor(30.6001 * e) + f
+	month = e - 1 if e < 14 else e - 13
+	year = c - 4715 if month <= 2 else c - 4716
+	return (int(year), int(month), int(day), jd_to_weekday(jd))
+
+def jd_to_weekday(jd):
+	return int(math.floor(jd + 1.5) % 7)
 
 def adjust_jd_hour(jd, hours):
 	return jd + hours / 24.0
