@@ -14,7 +14,7 @@ def from_gregorian(y, m, d):
 	h_year = i // 12 + 1420
 	h_month = i % 12 + 1
 	h_day = jd - month_start + 1
-	return (h_year, h_month, h_day, formula.jd_to_weekday(jd), _month_len[i])
+	return (h_year, h_month, h_day, _month_len[i])
 
 def to_gregorian(y, m, d):
 	index = (y - 1420) * 12 + m - 1

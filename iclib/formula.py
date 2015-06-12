@@ -12,7 +12,7 @@
 # - all angles are "currently" in degrees instead of radians
 # - all length (actually only h) are in meters
 # - all times are in hours
-# - month and day start from 1, weekday start from 0 (Ahad/Sunday)
+# - month, day, and weekday start from 1 (Muharram, January, Ahad/Sunday)
 
 import math
 
@@ -105,10 +105,10 @@ def jd_to_gregorian(jd):
 	day = b - d - math.floor(30.6001 * e) + f
 	month = e - 1 if e < 14 else e - 13
 	year = c - 4715 if month <= 2 else c - 4716
-	return (int(year), int(month), int(day), jd_to_weekday(jd))
+	return (int(year), int(month), int(day))
 
 def jd_to_weekday(jd):
-	return int(math.floor(jd + 1.5) % 7)
+	return int(math.floor(jd + 1.5) % 7) + 1
 
 def adjust_jd_hour(jd, hours):
 	return jd + hours / 24.0
