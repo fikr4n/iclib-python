@@ -1,3 +1,17 @@
+# Copyright (C) 2015 Fikrul Arif
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # Convention for internal/basic formula:
 # - short param name, mid-length method name
 # - no structure/class, only basic/primitives known in majority of languages
@@ -13,7 +27,21 @@
 # - all length (actually only h) are in meters
 # - all times are in hours
 # - month, day, and weekday start from 1 (Muharram, January, Ahad/Sunday)
+"""Basic formula of calculation
 
+Prayer time calculation functions return numbers in hours, 0 means midnight,
+13.5 means 13:30, etc. They have some of these parameters, each of them is
+number:
+	lat - latitude in degrees
+	lng - longitude in degrees
+	h - observer's altitude/height from sealevel in meters
+	tz - timezone
+	et - Equation of Time (eq_time function)
+	ds - declination of the Sun (decl_sun function)
+	t_zuhr - Zuhr time in hours (zuhr function)
+	fajr_angle - angle for Fajr time
+	isha_angle - angle for Isha time
+"""
 import math
 
 
@@ -67,7 +95,7 @@ def eq_time(jd):
 		- 212             * _sin_deg(4 * l0)) / 60000.0
 
 def decl_sun(jd):
-	"""Return Declination of the sun in degrees"""
+	"""Return declination of the Sun in degrees"""
 	t = 2 * math.pi * (jd - 2451545) / 365.25 # angle of date
 	return (0.37877
 		+ 23.264  * _sin_deg(    57.297 * t - 79.547)
@@ -75,7 +103,13 @@ def decl_sun(jd):
 		+ 0.17132 * _sin_deg(3 * 57.297 * t - 59.722))
 
 def gregorian_to_jd(y, m, d):
-	"""Return Julian Day of a Gregorian or Julian date"""
+	"""Return Julian Day of a Gregorian or Julian date
+	
+	Param:
+	y as int - year
+	m as int - month [1..12]
+	d as int - day [1..31]
+	"""
 	if m <= 2:
 		m += 12; y -= 1
 	if y > 1582 or (y == 1582 and (m > 10 or (m == 10 and d >= 15))):
@@ -90,6 +124,13 @@ def gregorian_to_jd(y, m, d):
 	return abs_jd
 
 def jd_to_gregorian(jd):
+	"""Return Gregorian or Julian date of Julian Day
+
+	Return:
+	int - year
+	int - month [1..12]
+	int - day [1..31]
+	"""
 	jd1 = jd + 0.5
 	z = math.floor(jd1)
 	f = jd1 - z
@@ -108,13 +149,27 @@ def jd_to_gregorian(jd):
 	return (int(year), int(month), int(day))
 
 def jd_to_weekday(jd):
+	"""Return weekday of Julian Day
+
+	Return:
+	int - weekday [1..7] where 1 is Ahad/Sunday
+	"""
 	return int(math.floor(jd + 1.5) % 7) + 1
 
 def adjust_jd_hour(jd, hours):
+	"""Return Julian Day with added hours"""
 	return jd + hours / 24.0
 
 def qibla(lat, lng):
-	"""Return qibla direction in degrees from the north (clock-wise)"""
+	"""Return qibla direction in degrees from the north (clock-wise)
+	
+	Param:
+	lat as number - latitude in degrees
+	lng as number - longitude in degrees
+
+	Return:
+	number - 0 means north, 90 means east, 270 means west, etc
+	"""
 	lng_a = 39.82616111
 	lat_a = 21.42250833
 	deg = _atan2_deg(_sin_deg(lng_a - lng),

@@ -1,4 +1,7 @@
+#!/usr/bin/python3
+
 from iclib import qibla
+
 
 def istiqlal():
 	lat = -6.169777778

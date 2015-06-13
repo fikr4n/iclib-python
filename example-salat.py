@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from iclib import salat
 import datetime as dt
 
