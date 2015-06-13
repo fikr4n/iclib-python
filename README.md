@@ -48,7 +48,7 @@ Latitude and longitude are in degrees, positive values for north and east respec
 ```
 
 ```python
-	from iclib import ummqura
+	from iclib.hijri import ummqura
 
 	print(ummqura.to_gregorian(1436, 1, 1)) # year, month, day
 	print(ummqura.from_gregorian(2015, 1, 1)) # year, month, day

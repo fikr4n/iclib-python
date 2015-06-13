@@ -13,7 +13,7 @@
 # limitations under the License.
 """Convert date to Umm al-Qura calendar and vice versa"""
 
-from . import formula
+from .. import formula
 
 
 def from_gregorian(y, m, d):
