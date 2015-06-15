@@ -7,7 +7,7 @@ This library is inspired by [Islamic Tools Library (ITL)](http://projects.arabey
 
 Calculation of **prayer times** and **qibla direction** is based on **Dr. Eng. Rinto Anugraha, M.Si.** from Universitas Gadjah Mada, Indonesia (published in 2012 AD), and also refer to **Pedoman Hisab Muhammadiyah** (published in 1430 AH / 2009 AD), **Wikipedia** (English version), etc for comparison and complement. **Umm al-Qura Hijri calendar** month lengths table is based on the output of ITL (not the source code).
 
-After releasing this Python version, we plan to make the C and Java version, and probably other languages. We also plan to implement hilal (crescent) altitude calculation for new moon estimation (not as reference for ibadah).
+This library is written in Python, see also the [Java](https://github.com/fikr4n/iclib-java) version. We plan to make the C version, and probably other languages. We also plan to implement hilal (crescent) altitude calculation for new moon estimation (not as reference for ibadah).
 
 ### Notes on Hijri conversion
 
