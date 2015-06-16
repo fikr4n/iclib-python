@@ -14,6 +14,7 @@
 """Prayer times calculator"""
 
 from . import formula
+from .util import hms, hm
 import datetime
 import math
 import collections
@@ -150,6 +151,8 @@ class Times(object):
 	def get_time(self, i):
 		"""Return the time as datetime.time
 
+		The value of self.use_second is considered.
+
 		Param:
 		i as int - ZUHR, ASR, etc
 		"""
@@ -163,10 +166,7 @@ class Times(object):
 		Param:
 		i as int - ZUHR, ASR, etc
 		"""
-		seconds = int(math.ceil(self.times[i] * 3600))
-		h, seconds = divmod(seconds, 3600)
-		m, seconds = divmod(seconds,   60)
-		return (h, m, seconds)
+		return hms(self.times[i])
 	
 	def get_hm(self, i):
 		"""Return the time as 2-tuple of hour-minute
@@ -174,9 +174,7 @@ class Times(object):
 		Param:
 		i as int - ZUHR, ASR, etc
 		"""
-		minutes = int(math.ceil(self.times[i] * 60))
-		h, minutes = divmod(minutes, 60)
-		return (h, minutes)
+		return hm(self.times[i])
 	
 	def __iter__(self):
 		return iter(self.get_time(i) for i in range(len(self.times)))

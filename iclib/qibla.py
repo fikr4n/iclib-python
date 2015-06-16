@@ -15,6 +15,7 @@
 """Qibla direction calculator"""
 
 from . import formula
+from .util import dms, dms_str
 
 
 def direction(lat, lng):
@@ -26,22 +27,15 @@ def direction_dms(lat, lng):
 	
 	Degree and arc minute is int, but arc second can be a floating-point number.
 	"""
-	return _dms(formula.qibla(lat, lng))
+	return dms(formula.qibla(lat, lng))
 
 def direction_str(lat, lng, prec=0):
-	"""Like direction_dms, but formatted as str 'deg° min\' sec\"'
+	"""Like direction_dms, but formatted as str 'deg° min′ sec″'
 	
 	Param:
 	lat
 	lng
 	prec as int - number of decimal places for the arc second
 	"""
-	d, m, s = direction_dms(lat, lng)
-	# negative input might returns wrong result
-	return '{}° {}\' {:.{}f}"'.format(d, m, s, prec)
+	return dms_str(formula.qibla(lat, lng), prec)
 
-def _dms(deg):
-	seconds = deg * 3600
-	m, s = divmod(seconds, 60)
-	d, m = divmod(m, 60)
-	return (int(d), int(m), s)

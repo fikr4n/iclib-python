@@ -104,12 +104,16 @@ def decl_sun(jd):
 
 def gregorian_to_jd(y, m, d):
 	"""Return Julian Day of a Gregorian or Julian date
+
+	Negative Julian Day (i.e. y < -4712 or 4713 BC) is not supported.
 	
 	Param:
 	y as int - year
 	m as int - month [1..12]
 	d as int - day [1..31]
 	"""
+	if y < -4712: raise ValueError('year < -4712 is not supported')
+
 	if m <= 2:
 		m += 12; y -= 1
 	if y > 1582 or (y == 1582 and (m > 10 or (m == 10 and d >= 15))):
@@ -120,17 +124,20 @@ def gregorian_to_jd(y, m, d):
 		b = 0
 	abs_jd = (1720994.5 + math.floor(365.25 * y) + math.floor(30.6001 * (m + 1))
 		+ d + b)
-	# negative year is okay, negative julian day might be wrong (i.e. y < -4712)
 	return abs_jd
 
 def jd_to_gregorian(jd):
 	"""Return Gregorian or Julian date of Julian Day
+
+	Negative Julian Day < -0.5 is not supported.
 
 	Return:
 	int - year
 	int - month [1..12]
 	int - day [1..31]
 	"""
+	if jd < -0.5: raise ValueError('Julian Day < -0.5 is not supported')
+
 	jd1 = jd + 0.5
 	z = math.floor(jd1)
 	f = jd1 - z
@@ -175,7 +182,7 @@ def qibla(lat, lng):
 	deg = _atan2_deg(_sin_deg(lng_a - lng),
 		_cos_deg(lat) * _tan_deg(lat_a)
 		- _sin_deg(lat) * _cos_deg(lng_a - lng))
-	return deg if deg > 0 else deg + 360
+	return deg if deg >= 0 else deg + 360
 
 def _sin_deg(deg):
 	return math.sin(math.radians(deg))

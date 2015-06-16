@@ -45,7 +45,7 @@ def from_gregorian(y, m, d):
 	h_year = i // 12 + 1420
 	h_month = i % 12 + 1
 	h_day = jd - month_start + 1
-	return (h_year, h_month, h_day, _month_len[i])
+	return (h_year, h_month, h_day, _month_len[i] + 29)
 
 def to_gregorian(y, m, d):
 	"""Convert to Gregorian date
