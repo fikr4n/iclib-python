@@ -130,7 +130,7 @@ class TimeCalculator(object):
 		ds = formula.decl_sun(jd)
 		transit = formula.zuhr(self.lng, self.tz, formula.eq_time(jd))
 		lat = self.lat
-		return Times(tuple(i + adj for i,adj in zip(
+		return Times([i + adj for i,adj in zip(
 			(
 			formula.fajr   (transit, lat, ds, self.fajr_angle),
 			formula.sunrise(transit, lat, ds, self.h),
@@ -138,8 +138,9 @@ class TimeCalculator(object):
 			formula.asr    (transit, lat, ds, self.asr_ratio),
 			formula.maghrib(transit, lat, ds, self.h),
 			formula.isha   (transit, lat, ds, self.isha_angle)),
-			self.adjustments)))
+			self.adjustments)])
 
+inf = float('inf')
 
 class Times(object):
 	"""Result of TimeCalculator"""
@@ -147,6 +148,9 @@ class Times(object):
 	def __init__(self, times):
 		self.times = times
 		self.use_second = False
+		if times[SUNRISE] == -inf or times[MAGHRIB] == inf:
+			times[ZUHR] = inf
+			times[ASR] = inf
 
 	def get_time(self, i):
 		"""Return the time as datetime.time
@@ -157,8 +161,11 @@ class Times(object):
 		i as int - ZUHR, ASR, etc
 		"""
 		# negative hours will raise exception
-		if self.use_second: return datetime.time(*self.get_hms(i))
-		else: return datetime.time(*self.get_hm(i))
+		try:
+			if self.use_second: return datetime.time(*self.get_hms(i))
+			else: return datetime.time(*self.get_hm(i))
+		except TypeError:
+			return None
 
 	def get_hms(self, i):
 		"""Return the time as 3-tuple of hour-minute-second

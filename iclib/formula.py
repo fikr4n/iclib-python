@@ -76,10 +76,9 @@ def hour_angle(lat, alt, ds):
 	"""Return hour angle in degrees"""
 	cos_ha = ((_sin_deg(alt) - _sin_deg(lat) * _sin_deg(ds))
 		/     (                _cos_deg(lat) * _cos_deg(ds)))
-	if -1 <= cos_ha <= 1:
-		return _acos_deg(cos_ha)
-	else:
-		return float('nan')
+	if cos_ha < -1: return -float('inf')
+	if cos_ha > 1: return float('inf')
+	return _acos_deg(cos_ha)
 
 def eq_time(jd):
 	"""Return Equation of Time in hours"""

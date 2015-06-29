@@ -38,6 +38,8 @@ def hms(hours):
 
 	If hours is negative, only hour of the tuple is negative.
 	"""
+	if math.isinf(hours):
+		return None
 	seconds = int(math.ceil(hours * 3600))
 	h, seconds = divmod(seconds, 3600)
 	m, seconds = divmod(seconds,   60)
@@ -48,6 +50,8 @@ def hm(hours):
 
 	If hours is negative, only hour of the tuple is negative.
 	"""
+	if math.isinf(hours):
+		return None
 	minutes = int(math.ceil(hours * 60))
 	h, minutes = divmod(minutes, 60)
 	return (h, minutes)
