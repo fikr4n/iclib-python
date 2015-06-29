@@ -9,7 +9,7 @@ Calculation of **prayer times** and **qibla direction** is based on **Dr. Eng. R
 
 This library is written in Python, see also the [Java](https://github.com/fikr4n/iclib-java) version. We plan to make the C version, and probably other languages. We also plan to implement hilal (crescent) altitude calculation for new moon estimation (not as reference for ibadah).
 
-### Notes on Hijri conversion
+**Notes on Hijri conversion**
 
 Any Hijri conversion including Umm al-Qura is not used as reference for ibadah e.g. beginning of saum (fasting), Eid al-Fitr, and Eid al-Adha.
 
@@ -53,6 +53,28 @@ Latitude and longitude are in degrees, positive values for north and east respec
 	print(ummqura.to_gregorian(1436, 1, 1)) # year, month, day
 	print(ummqura.from_gregorian(2015, 1, 1)) # year, month, day
 ```
+
+## Calculation method choices
+
+For Asr, you can choose between "Majority" and "Hanafi". According to the study of the majority of scholars (_Jumhur Ulama_), including Imam Shafi'i, based on Hadith Asr is when the length of shadow **equals** to the length of the object, plus the length of the shadow at midday. However, according to the study of Imam Hanafi, the length of shadow is **twice** the length of the object, plus the length of the shadow at midday.
+
+For Fajr and Isha, there are difference (scientific) opinions about the angle of the Sun (below the horizon) at those time. These are some Islamic institution standards you can choose. Some is not implemented yet, but you can set it manually. _(Copied from [itl-java](https://github.com/fikr4n/itl-java) README file)_
+
+- **Egyptian General Authority of Survey**; usually used in Indonesia, Iraq, Jordan, Lebanon, Malaysia, Singapore, Syria, parts of Africa, and parts of United States.
+- **University of Islamic Sciences**, Karachi (Shafi'i); usually used in Iran, Kuwait, and parts of Europe.
+- **University of Islamic Sciences**, Karachi (Hanafi); usually used in Afghanistan, Bangladesh, and India.
+- **Islamic Society of North America**; usually used in Canada, Parts of UK, and parts of United States.
+- **Muslim World League (MWL)**; usually used in parts of Europe, Far East, and parts of United States.
+- **Umm Al-Qurra University**; usually used in Saudi Arabia.
+- Fixed Ishaa Angle Interval (always 90); usually used in Bahrain, Oman, Qatar, United Arab Emirates.
+
+More about prayer times, you can learn from Kitabs of Fiqih or online resource.
+
+## Further reading
+
+- Waktu Shalat (Bahasa Indonesia) [1](http://rumaysho.com/shalat/waktu-shalat-1-shalat-zhuhur-2932.html) [2](http://rumaysho.com/shalat/waktu-shalat-2-shalat-ashar-2936.html) [3](http://rumaysho.com/shalat/waktu-shalat-3-shalat-maghrib-2940.html) [4](http://rumaysho.com/shalat/waktu-shalat-4-shalat-isya-2944.html) [5](http://rumaysho.com/shalat/waktu-shalat-5-shalat-shubuh-2948.html)
+
+---
 
 _We need your dua and support_
 
