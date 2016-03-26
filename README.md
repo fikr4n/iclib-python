@@ -70,6 +70,12 @@ For Fajr and Isha, there are difference (scientific) opinions about the angle of
 
 There are locations near the poles having extreme latitude where some salat times cannot be calculated. For example, if location L is always night on date D1 till D2, we cannot calculate sunrise and maghrib for those days. Those extreme latitudes accross a (gregorian) year is displayed in black and white in attached images `generate_extreme_*.png`. Solution for these locations is by using estimation or approach. Please read the literatures about this.
 
+![Extreme latitude based on 'egypt' method](https://raw.githubusercontent.com/fikr4n/iclib-python/master/generate_extreme_egypt.png)
+![Extreme latitude based on 'isna' method](https://raw.githubusercontent.com/fikr4n/iclib-python/master/generate_extreme_isna.png)
+![Extreme latitude based on 'karachi' method](https://raw.githubusercontent.com/fikr4n/iclib-python/master/generate_extreme_karachi.png)
+![Extreme latitude based on 'muhammadiyah' method](https://raw.githubusercontent.com/fikr4n/iclib-python/master/generate_extreme_muhammadiyah.png)
+![Extreme latitude based on 'mwl' method](https://raw.githubusercontent.com/fikr4n/iclib-python/master/generate_extreme_mwl.png)
+
 More about prayer times, you can learn from Kitabs of Fiqih or online resource.
 
 ## Further reading
