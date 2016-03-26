@@ -68,6 +68,8 @@ For Fajr and Isha, there are difference (scientific) opinions about the angle of
 - **Umm Al-Qurra University**; usually used in Saudi Arabia.
 - Fixed Ishaa Angle Interval (always 90); usually used in Bahrain, Oman, Qatar, United Arab Emirates.
 
+There are locations near the poles having extreme latitude where some salat times cannot be calculated. For example, if location L is always night on date D1 till D2, we cannot calculate sunrise and maghrib for those days. Those extreme latitudes accross a (gregorian) year is displayed in black and white in attached images `generate_extreme_*.png`. Solution for these locations is by using estimation or approach. Please read the literatures about this.
+
 More about prayer times, you can learn from Kitabs of Fiqih or online resource.
 
 ## Further reading
